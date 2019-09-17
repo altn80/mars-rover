@@ -31,5 +31,12 @@ public class RoverTest {
         Position position = new Position(2, 5, Heading.EAST);
         Rover rover = new Rover(null, position, new Plateau(5, 5));
     }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testTurnRightRover() {
+        Position position = new Position(2, 5, Heading.EAST);
+        Rover rover = new Rover("Rover1", position, new Plateau(5, 5));
+        rover.processInstruction("L");
+    }
 
 }

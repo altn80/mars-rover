@@ -50,20 +50,16 @@ public class Position {
         this.heading = newHeading;
     }
 
-    void move() {
+    Position moveForward() {
         switch (this.heading) {
             case NORTH:
-                this.y++;
-                break;
+                return new Position(x, y+1, heading);
             case EAST:
-                this.x++;
-                break;
+                return new Position(x+1, y, heading);
             case SOUTH:
-                this.y--;
-                break;
+                return new Position(x, y-1, heading);
             case WEST:
-                this.x--;
-                break;
+                return new Position(x-1, y, heading);
             default:
                 throw new IllegalArgumentException("Invalid Heading: " + heading);
         }

@@ -15,7 +15,7 @@ import java.util.Objects;
 public class Rover {
 
     private final String name;
-    private final Position position;
+    private Position position;
     private final Plateau plateau;
 
     public Rover(String name, Position position, Plateau plateau) {
@@ -47,7 +47,7 @@ public class Rover {
                     turnRight();
                     break;
                 case 'M':
-                    move();
+                    moveForward();
                     break;
                 default:
                     throw new IllegalArgumentException("Invalid instruction: " + getName() + " -> " + instruction);
@@ -71,9 +71,14 @@ public class Rover {
         this.position.updateHeading(getPosition().getHeading().turnRight());
     }
 
-    private void move() {
-        //TODO: Verify if cross plateau dimensions
-        getPosition().move();
+    private void moveForward() {
+        Position newPosition = getPosition().moveForward();
+        plateau.validatePosition(position);
+        this.updatePosition(newPosition);
+    }
+    
+    private void updatePosition(Position newPosition) {
+        this.position = newPosition;
     }
 
     @Override
@@ -97,5 +102,7 @@ public class Rover {
         final Rover other = (Rover) obj;
         return Objects.equals(this.name, other.name);
     }
+
+    
 
 }

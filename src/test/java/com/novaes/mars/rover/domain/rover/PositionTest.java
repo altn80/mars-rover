@@ -40,37 +40,37 @@ public class PositionTest {
     @Test
     public void testMovingNorth() {
         Position position = new Position(2, 5, Heading.NORTH);
-        position.move();
-        Assert.assertEquals(2, position.getX());
-        Assert.assertEquals(6, position.getY());
-        Assert.assertEquals(Heading.NORTH, position.getHeading());
+        Position newPosition = position.moveForward();
+        Assert.assertEquals(2, newPosition.getX());
+        Assert.assertEquals(6, newPosition.getY());
+        Assert.assertEquals(Heading.NORTH, newPosition.getHeading());
     }
 
     @Test
     public void testMovingSouth() {
         Position position = new Position(2, 5, Heading.SOUTH);
-        position.move();
-        Assert.assertEquals(2, position.getX());
-        Assert.assertEquals(4, position.getY());
-        Assert.assertEquals(Heading.SOUTH, position.getHeading());
+        Position newPosition = position.moveForward();
+        Assert.assertEquals(2, newPosition.getX());
+        Assert.assertEquals(4, newPosition.getY());
+        Assert.assertEquals(Heading.SOUTH, newPosition.getHeading());
     }
 
     @Test
     public void testMovingEast() {
         Position position = new Position(2, 5, Heading.EAST);
-        position.move();
-        Assert.assertEquals(3, position.getX());
-        Assert.assertEquals(5, position.getY());
-        Assert.assertEquals(Heading.EAST, position.getHeading());
+        Position newPosition = position.moveForward();
+        Assert.assertEquals(3, newPosition.getX());
+        Assert.assertEquals(5, newPosition.getY());
+        Assert.assertEquals(Heading.EAST, newPosition.getHeading());
     }
 
     @Test
     public void testMovingWest() {
         Position position = new Position(2, 5, Heading.WEST);
-        position.move();
-        Assert.assertEquals(1, position.getX());
-        Assert.assertEquals(5, position.getY());
-        Assert.assertEquals(Heading.WEST, position.getHeading());
+        Position newPosition = position.moveForward();
+        Assert.assertEquals(1, newPosition.getX());
+        Assert.assertEquals(5, newPosition.getY());
+        Assert.assertEquals(Heading.WEST, newPosition.getHeading());
     }
 
 }
