@@ -1,5 +1,9 @@
 # mars-rover assessment
 
+## Build/Run Requirements
+* apache maven 3
+* jdk 1.8
+
 ## Build Instructions
 
   ```
