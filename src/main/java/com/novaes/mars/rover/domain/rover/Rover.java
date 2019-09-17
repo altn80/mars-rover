@@ -11,29 +11,30 @@ package com.novaes.mars.rover.domain.rover;
  */
 public class Rover {
 
-    private int x;
-    private int y;
-    private String heading;
+    private final String name;
+    private final Position position;
 
-    public Rover(int x, int y, String heading) {
-        if (x < 0 || y < 0) {
-            throw new IllegalArgumentException("Invalid rover landing");
+    public Rover(String name, Position position) {
+        validateRover(name, position);
+        this.name = name;
+        this.position = position;
+    }
+
+    private void validateRover(String name, Position position) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Rover needs a name");
         }
-        this.x = x;
-        this.y = y;
-        this.heading = heading;
+        if (position == null) {
+            throw new IllegalArgumentException("Rover needs a posision");
+        }
     }
 
-    public int getX() {
-        return x;
+    public String getName() {
+        return name;
     }
 
-    public int getY() {
-        return y;
-    }
-
-    public String getHeading() {
-        return heading;
+    public Position getPosition() {
+        return position;
     }
 
 }
