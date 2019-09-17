@@ -15,26 +15,27 @@ import java.util.Objects;
 public class Rover {
 
     private final String name;
-    private Position position;
+    private Coordinate coordinate;
     private final Plateau plateau;
 
-    public Rover(String name, Position position, Plateau plateau) {
-        validateRover(name, position, plateau);
+    public Rover(String name, Coordinate coordinate, Plateau plateau) {
+        validateRover(name, coordinate, plateau);
         this.name = name;
-        this.position = position;
+        this.coordinate = coordinate;
         this.plateau = plateau;
     }
 
-    private void validateRover(String name, Position position, Plateau plateau) {
+    private void validateRover(String name, Coordinate coordinate, Plateau plateau) {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Rover needs a name");
         }
-        if (position == null) {
-            throw new IllegalArgumentException("Rover needs a posision");
+        if (coordinate == null) {
+            throw new IllegalArgumentException("Rover needs a coordinate");
         }
         if (plateau == null) {
             throw new IllegalArgumentException("Rover needs a plateau to land");
         }
+        plateau.validateCoordinate(coordinate);
     }
 
     public void processInstruction(String instructions) {
@@ -59,26 +60,26 @@ public class Rover {
         return name;
     }
 
-    public Position getPosition() {
-        return position;
+    public Coordinate getCoordinate() {
+        return coordinate;
     }
 
     private void turnLeft() {
-        this.position.updateHeading(getPosition().getHeading().turnLeft());
+        this.coordinate.updateHeading(getCoordinate().getHeading().turnLeft());
     }
 
     private void turnRight() {
-        this.position.updateHeading(getPosition().getHeading().turnRight());
+        this.coordinate.updateHeading(getCoordinate().getHeading().turnRight());
     }
 
     private void moveForward() {
-        Position newPosition = getPosition().moveForward();
-        plateau.validatePosition(position);
-        this.updatePosition(newPosition);
+        Coordinate newCoordinate = getCoordinate().moveForward();
+        plateau.validateCoordinate(coordinate);
+        this.updateCoordinate(newCoordinate);
     }
     
-    private void updatePosition(Position newPosition) {
-        this.position = newPosition;
+    private void updateCoordinate(Coordinate newCoordinate) {
+        this.coordinate = newCoordinate;
     }
 
     @Override

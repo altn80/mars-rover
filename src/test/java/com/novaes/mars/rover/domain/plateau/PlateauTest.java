@@ -6,7 +6,7 @@
 package com.novaes.mars.rover.domain.plateau;
 
 import com.novaes.mars.rover.domain.rover.Heading;
-import com.novaes.mars.rover.domain.rover.Position;
+import com.novaes.mars.rover.domain.rover.Coordinate;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -27,33 +27,37 @@ public class PlateauTest {
     public void testInvalidPlateau() {
         Plateau plateau = new Plateau(0, -1);
     }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidPlateau2() {
+        Plateau plateau = new Plateau(-1, 1);
+    }
 
     @Test
-    public void testValidatePosition() {
+    public void testValidateCoordinate() {
         Plateau plateau = new Plateau(5, 6);
-        Position position = new Position(0, 0, Heading.EAST);
+        Coordinate coordinate = new Coordinate(0, 0, Heading.EAST);
         try {
-            plateau.validatePosition(position);
+            plateau.validateCoordinate(coordinate);
         } catch (IllegalStateException e) {
-            Assert.fail("Valid Position");
+            Assert.fail("Valid Coordinate");
         }
 
     }
 
     @Test(expected = IllegalStateException.class)
-    public void testValidatePosition2() {
+    public void testValidateCoordinate2() {
         Plateau plateau = new Plateau(5, 6);
-        Position position = new Position(0, 7, Heading.EAST);
-        plateau.validatePosition(position);
+        Coordinate coordinate = new Coordinate(0, 7, Heading.EAST);
+        plateau.validateCoordinate(coordinate);
 
     }
     
     @Test(expected = IllegalStateException.class)
-    public void testValidatePosition3() {
+    public void testValidateCoordinate3() {
         Plateau plateau = new Plateau(5, 6);
-        Position position = new Position(5, 6, Heading.EAST);
-        plateau.validatePosition(position);
+        Coordinate coordinate = new Coordinate(6, 7, Heading.EAST);
+        plateau.validateCoordinate(coordinate);
 
     }
-
 }

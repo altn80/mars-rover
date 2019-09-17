@@ -11,4 +11,8 @@ package com.novaes.mars.rover.application;
  */
 public class MarsRoverMainApplication {
     
+    public static void main(String[] args) {
+        
+    }
+    
 }

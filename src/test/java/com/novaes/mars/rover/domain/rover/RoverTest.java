@@ -6,7 +6,6 @@
 package com.novaes.mars.rover.domain.rover;
 
 import com.novaes.mars.rover.domain.plateau.Plateau;
-import com.novaes.mars.rover.domain.rover.Rover;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -18,25 +17,67 @@ public class RoverTest {
 
     @Test
     public void testValidRover() {
-        Position position = new Position(2, 5, Heading.EAST);
-        Rover rover = new Rover("Rover1", position, new Plateau(5, 5));
+        Coordinate coordinate = new Coordinate(2, 4, Heading.EAST);
+        Rover rover = new Rover("Rover1", coordinate, new Plateau(5, 5));
         Assert.assertEquals("Rover1", rover.getName());
-        Assert.assertEquals(2, rover.getPosition().getX());
-        Assert.assertEquals(5, rover.getPosition().getY());
-        Assert.assertEquals(Heading.EAST, rover.getPosition().getHeading());
+        Assert.assertEquals(2, rover.getCoordinate().getX());
+        Assert.assertEquals(4, rover.getCoordinate().getY());
+        Assert.assertEquals(Heading.EAST, rover.getCoordinate().getHeading());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidRover() {
-        Position position = new Position(2, 5, Heading.EAST);
-        Rover rover = new Rover(null, position, new Plateau(5, 5));
+        Coordinate coordinate = new Coordinate(2, 5, Heading.EAST);
+        Rover rover = new Rover(null, coordinate, new Plateau(5, 5));
     }
     
     @Test(expected = IllegalArgumentException.class)
+    public void testInvalidRover2() {
+        Coordinate coordinate = new Coordinate(2, 5, Heading.EAST);
+        Rover rover = new Rover("", coordinate, new Plateau(5, 5));
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidRover3() {
+        Rover rover = new Rover("Rover1", null, new Plateau(5, 5));
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidRover4() {
+        Coordinate coordinate = new Coordinate(2, 5, Heading.EAST);
+        Rover rover = new Rover("Rover1", coordinate, null);
+    }
+    
+    @Test
     public void testTurnRightRover() {
-        Position position = new Position(2, 5, Heading.EAST);
-        Rover rover = new Rover("Rover1", position, new Plateau(5, 5));
+        Coordinate coordinate = new Coordinate(2, 4, Heading.EAST);
+        Rover rover = new Rover("Rover1", coordinate, new Plateau(5, 5));
+        rover.processInstruction("R");
+        Assert.assertEquals(Heading.SOUTH,rover.getCoordinate().getHeading());
+    }
+    
+    @Test
+    public void testTurnLeftRover() {
+        Coordinate coordinate = new Coordinate(2, 4, Heading.EAST);
+        Rover rover = new Rover("Rover1", coordinate, new Plateau(5, 5));
         rover.processInstruction("L");
+        Assert.assertEquals(Heading.NORTH,rover.getCoordinate().getHeading());
+    }
+    
+    @Test
+    public void testMoveForwardRover() {
+        Coordinate coordinate = new Coordinate(2, 5, Heading.WEST);
+        Rover rover = new Rover("Rover1", coordinate, new Plateau(5, 5));
+        rover.processInstruction("M");
+        Assert.assertEquals(1,rover.getCoordinate().getX());
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidInstruction() {
+        Coordinate coordinate = new Coordinate(2, 5, Heading.WEST);
+        Rover rover = new Rover("Rover1", coordinate, new Plateau(5, 5));
+        rover.processInstruction("X");
+        
     }
 
 }

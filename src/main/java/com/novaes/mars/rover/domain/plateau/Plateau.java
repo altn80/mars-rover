@@ -5,7 +5,7 @@
  */
 package com.novaes.mars.rover.domain.plateau;
 
-import com.novaes.mars.rover.domain.rover.Position;
+import com.novaes.mars.rover.domain.rover.Coordinate;
 import com.novaes.mars.rover.domain.rover.Rover;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,9 +45,9 @@ public class Plateau {
         return width;
     }
     
-    public void validatePosition(Position position) {
-        if(position.getY() > this.height - 1  || position.getY() < 0 ||
-                position.getX() > this.width - 1 || position.getX() < 0) {
+    public void validateCoordinate(Coordinate coordinate) {
+        if(coordinate.getY() > this.height  || coordinate.getY() < 0 ||
+                coordinate.getX() > this.width || coordinate.getX() < 0) {
             throw new IllegalStateException("Out of plateau bounds");
         }
     }
