@@ -25,6 +25,14 @@ public class Rover {
         this.plateau = plateau;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
+
     private void validateRover(String name, Coordinate coordinate, Plateau plateau) {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Rover needs a name");
@@ -56,14 +64,6 @@ public class Rover {
         });
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public Coordinate getCoordinate() {
-        return coordinate;
-    }
-
     private void turnLeft() {
         this.coordinate.updateHeading(getCoordinate().getHeading().turnLeft());
     }
@@ -77,7 +77,7 @@ public class Rover {
         plateau.validateCoordinate(coordinate);
         this.updateCoordinate(newCoordinate);
     }
-    
+
     private void updateCoordinate(Coordinate newCoordinate) {
         this.coordinate = newCoordinate;
     }
@@ -103,7 +103,5 @@ public class Rover {
         final Rover other = (Rover) obj;
         return Objects.equals(this.name, other.name);
     }
-
-    
 
 }
