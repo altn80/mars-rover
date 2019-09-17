@@ -5,6 +5,7 @@
  */
 package com.novaes.mars.rover.domain.rover;
 
+import com.novaes.mars.rover.domain.plateau.Plateau;
 import com.novaes.mars.rover.domain.rover.Rover;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,7 +19,7 @@ public class RoverTest {
     @Test
     public void testValidRover() {
         Position position = new Position(2, 5, Heading.EAST);
-        Rover rover = new Rover("Rover1", position);
+        Rover rover = new Rover("Rover1", position, new Plateau(5, 5));
         Assert.assertEquals("Rover1", rover.getName());
         Assert.assertEquals(2, rover.getPosition().getX());
         Assert.assertEquals(5, rover.getPosition().getY());
@@ -28,7 +29,7 @@ public class RoverTest {
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidRover() {
         Position position = new Position(2, 5, Heading.EAST);
-        Rover rover = new Rover(null, position);
+        Rover rover = new Rover(null, position, new Plateau(5, 5));
     }
 
 }

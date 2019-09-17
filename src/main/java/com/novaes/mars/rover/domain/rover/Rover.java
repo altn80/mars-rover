@@ -5,6 +5,7 @@
  */
 package com.novaes.mars.rover.domain.rover;
 
+import com.novaes.mars.rover.domain.plateau.Plateau;
 import java.util.Objects;
 
 /**
@@ -15,22 +16,27 @@ public class Rover {
 
     private final String name;
     private final Position position;
+    private final Plateau plateau;
 
-    public Rover(String name, Position position) {
-        validateRover(name, position);
+    public Rover(String name, Position position, Plateau plateau) {
+        validateRover(name, position, plateau);
         this.name = name;
         this.position = position;
+        this.plateau = plateau;
     }
 
-    private void validateRover(String name, Position position) {
+    private void validateRover(String name, Position position, Plateau plateau) {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Rover needs a name");
         }
         if (position == null) {
             throw new IllegalArgumentException("Rover needs a posision");
         }
+        if (plateau == null) {
+            throw new IllegalArgumentException("Rover needs a plateau to land");
+        }
     }
-    
+
     public void processInstruction(String instructions) {
         instructions.chars().forEach(instruction -> {
             switch (instruction) {
@@ -56,7 +62,7 @@ public class Rover {
     public Position getPosition() {
         return position;
     }
-    
+
     private void turnLeft() {
         this.position.updateHeading(getPosition().getHeading().turnLeft());
     }
