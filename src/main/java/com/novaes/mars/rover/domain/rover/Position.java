@@ -11,9 +11,9 @@ package com.novaes.mars.rover.domain.rover;
  */
 public class Position {
 
-    private final int x;
-    private final int y;
-    private final Heading heading;
+    private int x;
+    private int y;
+    private Heading heading;
 
     public Position(int x, int y, Heading heading) {
         validatePosition(x, y, heading);
@@ -44,6 +44,29 @@ public class Position {
 
     public Heading getHeading() {
         return heading;
+    }
+
+    void updateHeading(Heading newHeading) {
+        this.heading = newHeading;
+    }
+
+    void move() {
+        switch (this.heading) {
+            case NORTH:
+                this.y++;
+                break;
+            case EAST:
+                this.x++;
+                break;
+            case SOUTH:
+                this.y--;
+                break;
+            case WEST:
+                this.x--;
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid Heading: " + heading);
+        }
     }
 
     @Override

@@ -25,6 +25,36 @@ public enum Heading {
     public String getHeading() {
         return heading;
     }
+    
+    public Heading turnRight() {
+        switch (this) {
+            case NORTH:
+                return EAST;
+            case EAST:
+                return SOUTH;
+            case SOUTH:
+                return WEST;
+            case WEST:
+                return NORTH;
+            default:
+                throw new IllegalArgumentException("Invalid Heading");
+        }
+    }
+    public Heading turnLeft() {
+        switch (this) {
+            case NORTH:
+                return WEST;
+            case WEST:
+                return SOUTH;
+            case SOUTH:
+                return EAST;
+            case EAST:
+                return NORTH;
+            default:
+                throw new IllegalArgumentException("Invalid Heading");
+        }
+    }
+    
 
     public static Heading from(String heading) {
         if (heading == null || heading.trim().isEmpty()) {

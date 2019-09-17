@@ -5,6 +5,8 @@
  */
 package com.novaes.mars.rover.domain.rover;
 
+import java.util.Objects;
+
 /**
  *
  * @author andre
@@ -28,6 +30,24 @@ public class Rover {
             throw new IllegalArgumentException("Rover needs a posision");
         }
     }
+    
+    public void processInstruction(String instructions) {
+        instructions.chars().forEach(instruction -> {
+            switch (instruction) {
+                case 'L':
+                    turnLeft();
+                    break;
+                case 'R':
+                    turnRight();
+                    break;
+                case 'M':
+                    move();
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid instruction: " + getName() + " -> " + instruction);
+            }
+        });
+    }
 
     public String getName() {
         return name;
@@ -35,6 +55,41 @@ public class Rover {
 
     public Position getPosition() {
         return position;
+    }
+    
+    private void turnLeft() {
+        this.position.updateHeading(getPosition().getHeading().turnLeft());
+    }
+
+    private void turnRight() {
+        this.position.updateHeading(getPosition().getHeading().turnRight());
+    }
+
+    private void move() {
+        //TODO: Verify if cross plateau dimensions
+        getPosition().move();
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.name);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Rover other = (Rover) obj;
+        return Objects.equals(this.name, other.name);
     }
 
 }

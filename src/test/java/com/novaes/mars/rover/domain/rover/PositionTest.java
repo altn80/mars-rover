@@ -37,4 +37,40 @@ public class PositionTest {
         Position position = new Position(2, 5, null);
     }
 
+    @Test
+    public void testMovingNorth() {
+        Position position = new Position(2, 5, Heading.NORTH);
+        position.move();
+        Assert.assertEquals(2, position.getX());
+        Assert.assertEquals(6, position.getY());
+        Assert.assertEquals(Heading.NORTH, position.getHeading());
+    }
+
+    @Test
+    public void testMovingSouth() {
+        Position position = new Position(2, 5, Heading.SOUTH);
+        position.move();
+        Assert.assertEquals(2, position.getX());
+        Assert.assertEquals(4, position.getY());
+        Assert.assertEquals(Heading.SOUTH, position.getHeading());
+    }
+
+    @Test
+    public void testMovingEast() {
+        Position position = new Position(2, 5, Heading.EAST);
+        position.move();
+        Assert.assertEquals(3, position.getX());
+        Assert.assertEquals(5, position.getY());
+        Assert.assertEquals(Heading.EAST, position.getHeading());
+    }
+
+    @Test
+    public void testMovingWest() {
+        Position position = new Position(2, 5, Heading.WEST);
+        position.move();
+        Assert.assertEquals(1, position.getX());
+        Assert.assertEquals(5, position.getY());
+        Assert.assertEquals(Heading.WEST, position.getHeading());
+    }
+
 }
