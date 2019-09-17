@@ -3,7 +3,7 @@
 ## Build Instructions
 
   ```
-  mvn clean install
+  mvn clean package
   ```
 
 ## Run Instructions

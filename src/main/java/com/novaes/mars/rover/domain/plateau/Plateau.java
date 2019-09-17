@@ -9,6 +9,7 @@ import com.novaes.mars.rover.domain.rover.Coordinate;
 import com.novaes.mars.rover.domain.rover.Rover;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -16,40 +17,68 @@ import java.util.List;
  */
 public class Plateau {
 
-    private final int width;
-    private final int height;
+    private final PlateauDimension dimension;
     private final List<Rover> rovers;
 
-    public Plateau(int width, int height) {
-        validatePlateau(width, height);
-        this.width = width;
-        this.height = height;
+    public Plateau(PlateauDimension dimension) {
+        this.dimension = dimension;
         this.rovers = new ArrayList<>();
     }
 
-    private void validatePlateau(int width, int height) {
-        if (height <= 0) {
-            throw new IllegalArgumentException("Invalid plateau height");
-        }
-
-        if (width <= 0) {
-            throw new IllegalArgumentException("Invalid plateau width");
-        }
-    }
-
     public int getHeight() {
-        return height;
+        return this.dimension.getHeight();
     }
 
     public int getWidth() {
-        return width;
+        return this.dimension.getWidth();
+    }
+
+    public List<Rover> getRovers() {
+        return rovers;
     }
     
     public void validateCoordinate(Coordinate coordinate) {
-        if(coordinate.getY() > this.height  || coordinate.getY() < 0 ||
-                coordinate.getX() > this.width || coordinate.getX() < 0) {
+        if (coordinate.getY() > getHeight() || coordinate.getY() < 0
+                || coordinate.getX() > getWidth() || coordinate.getX() < 0) {
             throw new IllegalStateException("Out of plateau bounds");
         }
+    }
+
+    public void addRover(Rover rover) {
+        if (rovers.contains(rover)) {
+            throw new IllegalArgumentException("Rover's already landed: " + rover.getName());
+        }
+        rovers.add(rover);
+    }
+
+    public Rover getRover(String name) {
+        Rover rover = this.rovers.stream().filter(r -> r.getName().equals(name)).findFirst().orElse(null);
+        if (rover == null) {
+            throw new IllegalArgumentException("Rover has not landed on this Plateau: " + name);
+        }
+        return rover;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 29 * hash + Objects.hashCode(this.dimension);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Plateau other = (Plateau) obj;
+        return Objects.equals(this.dimension, other.dimension);
     }
 
 }
