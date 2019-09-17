@@ -82,4 +82,13 @@ public class PlateauTest {
         plateau.addRover(rover);
         Assert.assertEquals(rover, plateau.getRover("Rover1"));
     }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testPlateauGetRover2() {
+        PlateauDimension dimension = new PlateauDimension(5, 5);
+        Plateau plateau = new Plateau(dimension);
+        Rover rover = new Rover("Rover1", new Coordinate(1, 2, Heading.EAST), plateau);
+        plateau.addRover(rover);
+        Assert.assertEquals(rover, plateau.getRover("Rover2"));
+    }
 }
