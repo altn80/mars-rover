@@ -12,7 +12,7 @@
   java -jar mars-rover-1.0.jar < input.txt
   ```
 
-input.txt:
+Example input.txt:
 ```
 Plateau:5 5
 Rover1 Landing:1 2 N
