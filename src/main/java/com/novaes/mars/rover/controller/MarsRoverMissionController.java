@@ -22,10 +22,10 @@ public class MarsRoverMissionController {
 
     static String REGEX_PLATEAU_COMMAND = "^Plateau:([1-9][0-9]*) ([1-9][0-9]*)$";
     static String REGEX_PLATEAU_DIMENSIONS = "([1-9][0-9]*) ([1-9][0-9]*)$";
-    static String REGEX_ROVER_LANDING_COMMAND = "^Rover([1-9][0-9]*) Landing:([0-9]*) ([0-9]*) [N|S|W|E]$";
-    static String REGEX_ROVER_IDENTIFIER = "^Rover([1-9][0-9]*)";
+    static String REGEX_ROVER_LANDING_COMMAND = "^(\\w)+ Landing:([0-9]*) ([0-9]*) [N|S|W|E]$";
+    static String REGEX_ROVER_IDENTIFIER = "^(\\w)+";
     static String REGEX_ROVER_LANDING_POSITION = "([0-9]*) ([0-9]*) [N|S|W|E]$";
-    static String REGEX_ROVER_INSTRUCTIONS_COMMAND = "^Rover([1-9][0-9]*) Instructions:[L|R|M]*$";
+    static String REGEX_ROVER_INSTRUCTIONS_COMMAND = "^(\\w)+ Instructions:[L|R|M]*$";
     static String REGEX_ROVER_INSTRUCTIONS = "[L|R|M]*$";
 
     public String launch(String[] commands) {

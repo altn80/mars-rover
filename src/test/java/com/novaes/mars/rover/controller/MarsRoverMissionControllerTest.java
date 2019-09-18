@@ -32,8 +32,8 @@ public class MarsRoverMissionControllerTest {
     @Test
     public void testLandRover() {
         Plateau plateau = new Plateau(new PlateauDimension(5, 6));
-        Assert.assertEquals(new Rover("Rover1", new Coordinate(1, 2, Heading.from("N")), plateau),
-                new MarsRoverMissionController().landRover("Rover1 Landing:1 2 N", plateau));
+        Assert.assertEquals(new Rover("Test", new Coordinate(1, 2, Heading.from("N")), plateau),
+                new MarsRoverMissionController().landRover("Test Landing:1 2 N", plateau));
     }
 
     @Test
