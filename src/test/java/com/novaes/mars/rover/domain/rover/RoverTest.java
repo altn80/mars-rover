@@ -87,6 +87,19 @@ public class RoverTest {
         Coordinate coordinate = new Coordinate(2, 5, Heading.WEST);
         Rover rover = new Rover("Rover1", coordinate, new Plateau(dimension));
         rover.processInstruction("X");
+    }
+    
+    @Test(expected = IllegalStateException.class)
+    public void testTwoRoversLandingSameCoordinate() {
+        PlateauDimension dimension = new PlateauDimension(5, 5);
+        Plateau plateau = new Plateau(dimension);
+        Coordinate coordinate = new Coordinate(0, 2, Heading.NORTH);
+        Rover rover = new Rover("Rover1", coordinate, plateau);
+        Rover rover2 = new Rover("Rover2", coordinate, plateau);
+        plateau.addRover(rover);
+        plateau.addRover(rover2);
+        rover.processInstruction("M");
+        rover2.processInstruction("M");
         
     }
 

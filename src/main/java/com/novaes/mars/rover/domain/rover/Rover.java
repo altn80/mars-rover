@@ -44,6 +44,7 @@ public class Rover {
             throw new IllegalArgumentException("Rover needs a plateau to land");
         }
         plateau.validateCoordinate(coordinate);
+        
     }
 
     public void processInstruction(String instructions) {
@@ -74,7 +75,7 @@ public class Rover {
 
     private void moveForward() {
         Coordinate newCoordinate = getCoordinate().moveForward();
-        plateau.validateCoordinate(coordinate);
+        plateau.validateCoordinate(newCoordinate);
         this.updateCoordinate(newCoordinate);
     }
 

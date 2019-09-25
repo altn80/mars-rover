@@ -42,6 +42,9 @@ public class Plateau {
                 || coordinate.getX() > getWidth() || coordinate.getX() < 0) {
             throw new IllegalStateException("Out of plateau bounds");
         }
+        if(rovers.stream().anyMatch(rover -> rover.getCoordinate().equals(coordinate))) {
+            throw new IllegalStateException("Rover collision ");
+        }
     }
 
     public void addRover(Rover rover) {
